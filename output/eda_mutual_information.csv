@@ -1,0 +1,14 @@
+,feature,mutual_info_active,mutual_info_affinity
+12,logp_pi_interaction,0.35168,1.074588
+1,logp,0.225697,0.631977
+8,protein_pi,0.047598,0.075856
+5,polar_surface_area,0.007599,0.019643
+3,h_bond_acceptors,0.007387,0.015902
+0,molecular_weight,0.0,0.013086
+9,hydrophobicity,0.0,0.001869
+2,h_bond_donors,0.0,0.0
+4,rotatable_bonds,0.0,0.0
+6,compound_clogp,0.0,0.0
+7,protein_length,0.0,0.0
+10,binding_site_size,0.000602,0.0
+11,mw_ratio,0.0,0.0

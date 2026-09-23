@@ -1,0 +1,4 @@
+,column,n_missing,active_rate_missing,active_rate_present,chi2_p_value,mean_affinity_missing,mean_affinity_present,ttest_p_value,informative_missingness
+0,logp,60,0.3,0.3041,1.0,6.5989,6.5291,0.5623,no
+1,polar_surface_area,60,0.3167,0.3036,0.9409,6.7524,6.5244,0.1786,no
+2,hydrophobicity,60,0.3,0.3041,1.0,6.6042,6.529,0.5861,no

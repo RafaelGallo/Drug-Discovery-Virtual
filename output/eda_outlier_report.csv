@@ -1,0 +1,15 @@
+,feature,iqr_outliers,iqr_pct,zscore_outliers,physically_impossible,min,max
+0,mw_ratio,144,7.2,37,0,0.098,3.404
+1,binding_affinity,66,3.3,41,0,1.99,15.04
+2,rotatable_bonds,46,2.3,13,0,0.0,17.0
+3,molecular_weight,34,1.7,14,0,50.307,994.049
+4,logp,32,1.65,16,0,-4.325,9.978
+5,logp_pi_interaction,17,0.85,8,0,-6.625,76.999
+6,compound_clogp,15,0.75,5,0,-1.426,6.892
+7,binding_site_size,14,0.7,6,0,4.656,24.888
+8,protein_pi,10,0.5,4,0,2.598,10.267
+9,hydrophobicity,9,0.46,5,0,0.332,0.978
+10,polar_surface_area,6,0.31,4,1,-24.654,159.627
+11,h_bond_donors,4,0.2,4,0,0.0,8.0
+12,h_bond_acceptors,3,0.15,7,0,0.0,15.0
+13,protein_length,0,0.0,0,0,201.0,1499.0

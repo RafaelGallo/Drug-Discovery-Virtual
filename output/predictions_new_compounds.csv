@@ -1,0 +1,6 @@
+protein_id,compound_id,activity_probability,predicted_active,predicted_binding_affinity
+PID_900,NEW_0001,0.9985,1,8.6168
+PID_901,NEW_0002,0.0039,0,5.67
+PID_100,NEW_0003,0.6499,1,7.1122
+PID_902,NEW_0004,0.9313,1,7.7926
+PID_165,NEW_0005,0.0684,0,6.2046

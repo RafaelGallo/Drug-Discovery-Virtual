@@ -1,0 +1,18 @@
+column,dtype,non_null,missing,missing_pct,unique,unique_pct,example,description
+compound_id,object,2000,0,0.0,2000,100.0,CID_00000,Unique compound identifier
+protein_id,object,2000,0,0.0,400,20.0,PID_361,Protein target identifier
+molecular_weight,float64,2000,0,0.0,2000,100.0,499.67141530112326,Molecular weight (g/mol)
+logp,float64,1940,60,3.0,1940,97.0,2.487232587538428,Partition coefficient (lipophilicity)
+h_bond_donors,int64,2000,0,0.0,9,0.45,1,Hydrogen-bond donor count
+h_bond_acceptors,int64,2000,0,0.0,16,0.8,7,Hydrogen-bond acceptor count
+rotatable_bonds,int64,2000,0,0.0,17,0.85,4,Rotatable bond count
+polar_surface_area,float64,1940,60,3.0,1940,97.0,113.35081706662132,Topological polar surface area (A^2)
+compound_clogp,float64,2000,0,0.0,2000,100.0,4.050695616519293,Calculated logP
+protein_length,int64,2000,0,0.0,1044,52.2,678,Amino-acid chain length
+protein_pi,float64,2000,0,0.0,2000,100.0,6.019657217105079,Isoelectric point
+hydrophobicity,float64,1940,60,3.0,1940,97.0,0.81253403121251,Protein hydrophobicity index
+binding_site_size,float64,2000,0,0.0,2000,100.0,12.512165404542444,Active-site volume (A^3)
+mw_ratio,float64,2000,0,0.0,2000,100.0,0.7369784886447246,Molecular weight / protein length ratio
+logp_pi_interaction,float64,2000,0,0.0,2000,100.0,14.972287596194638,Interaction term (logP x isoelectric point)
+binding_affinity,float64,2000,0,0.0,2000,100.0,5.996664621837803,TARGET - pKi = -log10(Ki)
+active,int64,2000,0,0.0,2,0.1,0,TARGET - binary activity label (1 = active)

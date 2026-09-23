@@ -1,0 +1,55 @@
+{
+  "rows": 2000,
+  "columns": 17,
+  "numeric_features": [
+    "molecular_weight",
+    "logp",
+    "h_bond_donors",
+    "h_bond_acceptors",
+    "rotatable_bonds",
+    "polar_surface_area",
+    "compound_clogp",
+    "protein_length",
+    "protein_pi",
+    "hydrophobicity",
+    "binding_site_size",
+    "mw_ratio",
+    "logp_pi_interaction"
+  ],
+  "categorical_features": [
+    "protein_id"
+  ],
+  "identifier_columns": [
+    "compound_id"
+  ],
+  "target_regression": "binding_affinity",
+  "target_classification": "active",
+  "active_rate": 0.304,
+  "activity_threshold_pki": 7.0,
+  "leakage_confirmed": true,
+  "columns_with_missing_values": [
+    "logp",
+    "polar_surface_area",
+    "hydrophobicity"
+  ],
+  "missing_rate": {
+    "logp": 0.03,
+    "polar_surface_area": 0.03,
+    "hydrophobicity": 0.03
+  },
+  "recommended_engineered_features": [
+    "logp_x_pi_exact",
+    "logp_x_hydrophobicity",
+    "logp_squared",
+    "lipophilic_site_fit",
+    "clogp_minus_logp",
+    "lipinski_violations",
+    "drug_like",
+    "mw_per_residue_exact",
+    "site_per_residue",
+    "flexibility_index",
+    "tpsa_over_mw",
+    "hbd_plus_hba",
+    "hba_to_hbd_ratio"
+  ]
+}

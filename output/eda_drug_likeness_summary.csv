@@ -1,0 +1,10 @@
+,rule,compounds,share_pct
+0,Molecular weight > 500,654,32.7
+1,logP > 5,320,16.0
+2,H-bond donors > 5,18,0.9
+3,H-bond acceptors > 10,32,1.6
+4,Rotatable bonds > 10,83,4.2
+5,Polar surface area > 140,9,0.4
+6,Passes Rule of Five (<= 1 violation),1874,93.7
+7,Passes Veber rules,1910,95.5
+8,Drug-like (both),1787,89.4

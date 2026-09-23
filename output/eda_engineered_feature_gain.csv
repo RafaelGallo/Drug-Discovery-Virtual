@@ -1,0 +1,14 @@
+,engineered_feature,corr_with_affinity,corr_with_active
+0,logp_x_pi_exact,0.6731,0.6411
+1,logp_x_hydrophobicity,0.5796,0.5423
+2,logp_squared,0.5639,0.575
+3,lipophilic_site_fit,0.5439,0.506
+4,clogp_minus_logp,-0.4935,-0.4596
+5,lipinski_violations,0.2207,0.2594
+6,drug_like,-0.1451,-0.1489
+7,mw_per_residue_exact,-0.0674,-0.042
+8,site_per_residue,-0.0641,-0.0276
+9,flexibility_index,0.0216,0.027
+10,tpsa_over_mw,0.0198,0.0631
+11,hbd_plus_hba,-0.016,-0.0197
+12,hba_to_hbd_ratio,0.0055,-0.0108

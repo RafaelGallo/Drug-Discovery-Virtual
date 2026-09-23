@@ -1,0 +1,18 @@
+figure,file,caption
+1,01_missing_values.png,Missing data is limited to three numerical columns at exactly 3% each and is scattered uniformly across the rows; only 6 rows lose more than one value.
+2,02_target_distribution.png,The dataset is moderately imbalanced (30.4% active) and the activity label is a hard threshold on the binding affinity at exactly pKi = 7.0.
+3,03_target_leakage.png,"Applying the rule `active = 1 if binding_affinity >= 7.0` reproduces the label for 100% of the 2,000 rows, so the two targets encode the same information."
+4,04_affinity_shape.png,Binding affinity is unimodal and close to normal in the centre but carries a heavy right tail of high-affinity compounds that bends away from the Q-Q reference line.
+5,05_feature_histograms.png,"Most descriptors are symmetric and bell-shaped; the count features are discrete, `protein_length` is uniform by construction, and `mw_ratio` is by far the most asymmetric feature."
+6,06_standardised_boxplots.png,After standardisation every feature is centred on zero; the length of each box shows that `mw_ratio` and the count features carry the most extreme tails.
+7,07_outliers.png,"Only `mw_ratio` exceeds the announced 5% outlier rate under the IQR rule, while a simple domain rule exposes a negative polar surface area that no statistical rule would necessarily flag."
+8,08_correlation_matrices.png,"Correlations are read on a diverging blue-to-red ramp whose neutral grey midpoint means zero; the feature block is almost uncorrelated, and only the two targets and the logP-derived terms stand out."
+9,09_target_associations.png,"Only `logp_pi_interaction` and `logp` carry a strong signal towards both targets; every other descriptor sits near zero, so non-linear models will have to earn their advantage from interactions rather than from single features."
+10,10_top_feature_scatter.png,"The six most associated features plotted against binding affinity: the two logP-derived terms trend strongly, `protein_pi` mildly, and the remaining three form featureless clouds."
+11,11_violins_by_class.png,"Violin plots of every feature split by class, annotated with the Mann-Whitney U p-value; only `logp`, the shipped interaction term and `protein_pi` separate the two classes."
+12,12_protein_support.png,"Each protein is screened against about five compounds only, so per-protein statistics are noisy and target encoding would overfit badly."
+13,13_drug_likeness.png,"Most compounds respect the Rule of Five, yet the drug-like subset is markedly LESS active: potency here is driven by lipophilicity, which is exactly what the oral-bioavailability filters penalise."
+14,14_pca.png,"The features are nearly orthogonal, so no small set of components summarises them, yet the two classes already separate along PC1, which the loadings show is the lipophilicity axis."
+15,15_tsne.png,"t-SNE on a 1,200-compound sample finds no isolated cluster of active compounds; high-affinity points are spread through the embedding."
+16,16_feature_ranking.png,"Mutual information and effect size agree with the correlation analysis: the two logP terms dominate, `protein_pi` follows with a medium effect, and the remaining ten descriptors are statistically indistinguishable between the two classes."
+17,17_engineered_features.png,"4 engineered terms reach |r| >= 0.5, but none overtakes the interaction column shipped with the dataset, which stays the strongest single predictor."

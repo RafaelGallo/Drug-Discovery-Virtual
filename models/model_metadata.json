@@ -1,0 +1,116 @@
+{
+  "project": "Drug Discovery Virtual Screening",
+  "created_at": "2026-09-23T18:13:45",
+  "random_state": 42,
+  "dataset": {
+    "source_file": "drug_discovery_virtual_screening.csv",
+    "rows": 2000,
+    "train_rows": 1600,
+    "test_rows": 400,
+    "active_rate": 0.304,
+    "activity_threshold_pki": 7.0
+  },
+  "contract": {
+    "required_raw_columns": [
+      "protein_id",
+      "molecular_weight",
+      "logp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "polar_surface_area",
+      "compound_clogp",
+      "protein_length",
+      "protein_pi",
+      "hydrophobicity",
+      "binding_site_size",
+      "mw_ratio",
+      "logp_pi_interaction"
+    ],
+    "dropped_columns": [
+      "compound_id"
+    ],
+    "categorical_columns": [
+      "protein_id"
+    ],
+    "engineered_features": [
+      "hbond_total",
+      "hba_to_hbd_ratio",
+      "tpsa_over_mw",
+      "flexibility_index",
+      "clogp_minus_logp",
+      "logp_squared",
+      "logp_x_pi_exact",
+      "logp_x_hydrophobicity",
+      "lipophilic_site_fit",
+      "mw_per_residue_exact",
+      "site_per_residue",
+      "lipinski_violations",
+      "drug_like"
+    ],
+    "model_feature_order": [
+      "molecular_weight",
+      "logp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "polar_surface_area",
+      "compound_clogp",
+      "protein_length",
+      "protein_pi",
+      "hydrophobicity",
+      "binding_site_size",
+      "mw_ratio",
+      "logp_pi_interaction",
+      "hbond_total",
+      "hba_to_hbd_ratio",
+      "tpsa_over_mw",
+      "flexibility_index",
+      "clogp_minus_logp",
+      "logp_squared",
+      "logp_x_pi_exact",
+      "logp_x_hydrophobicity",
+      "lipophilic_site_fit",
+      "mw_per_residue_exact",
+      "site_per_residue",
+      "lipinski_violations",
+      "drug_like",
+      "protein_id_encoded"
+    ],
+    "unknown_category_code": -1
+  },
+  "classification": {
+    "best_model": "Logistic Regression",
+    "tuned": true,
+    "best_params": {
+      "solver": "lbfgs",
+      "penalty": "l2",
+      "C": 0.5
+    },
+    "decision_threshold": 0.4649999999999999,
+    "test_roc_auc": 0.9578075244722255,
+    "test_average_precision": 0.9264807840927585,
+    "test_f1_at_threshold": 0.8122270742358078,
+    "test_mcc_at_threshold": 0.7404865661302004
+  },
+  "regression": {
+    "best_model": "Linear Regression",
+    "test_rmse": 0.73922032659109,
+    "test_mae": 0.3370437639012734,
+    "test_r2": 0.6155316080979181
+  },
+  "leakage_rules": [
+    "`binding_affinity` must never be a feature of the classifier (`active` is exactly `binding_affinity >= 7.0`).",
+    "`active` must never be a feature of the regressor.",
+    "`compound_id` is a unique key and is always dropped."
+  ],
+  "library_versions": {
+    "python": "3.12.4",
+    "scikit_learn": "1.3.2",
+    "pandas": "2.2.3",
+    "numpy": "1.26.4",
+    "joblib": "1.4.2",
+    "xgboost": "3.0.1",
+    "lightgbm": "4.6.0"
+  }
+}

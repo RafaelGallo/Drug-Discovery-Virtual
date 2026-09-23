@@ -1,0 +1,14 @@
+,feature,mean_inactive,mean_active,difference,welch_p,mannwhitney_p,cohens_d,effect_size,bh_significant
+0,logp_pi_interaction,17.504294,34.260989,16.756694,0.0,0.0,2.166943,large,True
+1,logp,2.878672,4.854211,1.975539,0.0,0.0,1.448645,large,True
+2,protein_pi,6.214241,7.023751,0.809509,0.0,0.0,0.702829,medium,True
+3,polar_surface_area,79.331253,81.621104,2.289851,0.066017,0.053541,0.090402,negligible,False
+4,mw_ratio,0.721283,0.680842,-0.040441,0.068089,0.350917,-0.085078,negligible,False
+5,hydrophobicity,0.64305,0.650529,0.007479,0.120497,0.088525,0.078415,negligible,False
+6,molecular_weight,459.162473,451.299627,-7.862846,0.117056,0.183476,-0.075,negligible,False
+7,h_bond_acceptors,5.147989,5.039474,-0.108515,0.330421,0.686568,-0.046552,negligible,False
+8,protein_length,844.554598,858.934211,14.379613,0.434395,0.425089,0.037754,negligible,False
+9,compound_clogp,2.822228,2.793199,-0.029029,0.614231,0.664183,-0.024419,negligible,False
+10,binding_site_size,15.144631,15.181971,0.037339,0.802106,0.596329,0.012452,negligible,False
+11,rotatable_bonds,5.963362,5.980263,0.016901,0.883016,0.728362,0.007018,negligible,False
+12,h_bond_donors,1.962644,1.957237,-0.005407,0.934955,0.786105,-0.00401,negligible,False

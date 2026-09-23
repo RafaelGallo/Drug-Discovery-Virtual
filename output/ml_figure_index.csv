@@ -1,0 +1,12 @@
+figure,file,caption
+1,ml_01_classifier_ranking.png,"Every classifier beats random guessing by a wide margin, but the leaders are separated by less than their fold-to-fold error bars, so the choice between them is made by the declared simplicity rule rather than by a decimal place."
+2,ml_02_metric_comparison.png,"The same ten models scored on six metrics. The ordering is broadly stable, so the winner is not an artefact of the metric chosen — only accuracy, the least informative metric on imbalanced data, reshuffles the leading places."
+3,ml_03_roc_pr_curves.png,The six best classifiers are drawn in colour with their score in the legend; the remaining four stay grey so the chart never needs a ninth generated hue.
+4,ml_04_ablation.png,"Removing the 13 engineered features costs essentially nothing, while removing the single interaction term costs both models a large, unambiguous amount."
+5,ml_05_threshold_scan.png,"Precision and recall move in opposite directions as the threshold rises. The value is chosen where the out-of-fold F1 peaks; the right-hand panel shows the two curves side by side, and the distance between their peaks is the bias that test-set tuning hides."
+6,ml_06_confusion_calibration.png,"Counts and row percentages for the final classifier, plus the calibration curve that shows how closely the predicted probabilities match observed frequencies."
+7,ml_07_permutation_importance.png,"Shuffling a feature and measuring the loss in test ROC-AUC gives an honest, model-agnostic importance ranking, with error bars from fifteen repetitions."
+8,ml_08_error_analysis.png,Errors are strongly concentrated near the 7.0 cut-off — the median misclassified compound sits far closer to it than the median correct one — but a minority of mistakes are ordinary failures on unambiguous compounds.
+9,ml_09_regressor_ranking.png,"All ten regressors beat the naive mean predictor, and the four linear models take the four best places on error, explained variance and ranking quality alike."
+10,ml_10_regression_diagnostics.png,"Predictions hug the diagonal across the bulk of the range, and the errors form a very tight core with a small number of extreme outliers in both directions."
+11,ml_11_regression_importance.png,"The regression task relies on the same lipophilicity-driven descriptors as the classification task, confirming that both models learned the same chemistry."

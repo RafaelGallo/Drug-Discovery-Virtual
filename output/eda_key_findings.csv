@@ -1,0 +1,9 @@
+,topic,evidence,action for the modelling notebook
+0,Target leakage,`active` equals `binding_affinity >= 7.0` for 100% of the rows,"Never feed `binding_affinity` to the classifier, nor `active` to the regressor"
+1,Class imbalance,"30.4% active, ratio 2.29 : 1","Stratify every split; report ROC-AUC, PR-AUC and MCC instead of accuracy"
+2,Missing values,"3.0% in logp, polar_surface_area and hydrophobicity; consistent with MCAR",Median imputation inside the pipeline; do not drop rows
+3,Outliers,"5.7% of rows beyond 3 standard deviations, plus one impossible negative polar surface area",Clip to physical bounds and prefer tree models or robust losses
+4,Identifier column,`compound_id` is unique for every row,Drop it; encoding a perfect key invites memorisation
+5,High-cardinality category,`protein_id` has 400 levels and about 5 rows per level,"Label-encode as requested; avoid target encoding, which would overfit on 5 rows"
+6,Dominant signal,logp and logp x protein_pi; every other descriptor is near zero,Recompute the exact interaction term and expect a moderate performance ceiling
+7,Geometry,"Features are nearly orthogonal, but the classes separate along PC1, the lipophilicity axis",Skip dimensionality reduction; expect a linear boundary to already work well
