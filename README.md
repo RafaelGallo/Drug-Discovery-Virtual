@@ -1,5 +1,11 @@
 # Drug Discovery Virtual Screening
 
+[![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![scikit-learn 1.3.2](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![Jupyter Notebooks](https://img.shields.io/badge/Jupyter-Notebooks-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/)
+[![Dataset: 2,000 pairs](https://img.shields.io/badge/Dataset-2%2C000%20pairs-2ea44f)](input/drug_discovery_virtual_screening.csv)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 An end-to-end data science project for virtual screening of compound–protein pairs. The workflow covers exploratory data analysis (EDA), classification of compound activity, binding-affinity regression, model interpretation, and batch prediction.
 
 The repository includes a simulated reference dataset with 2,000 compound–protein pairs. Results demonstrate the analysis and modeling workflow; they are not experimental evidence, clinical validation, or a substitute for laboratory testing.
