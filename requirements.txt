@@ -1,10 +1,13 @@
-# Environment the artefacts in this folder were built with.
-# scikit-learn is pinned exactly: unpickling a model across a different version emits
-# InconsistentVersionWarning and may change behaviour silently.
-python_requires>=3.12
+# Model runtime and notebook dependencies. Models were generated with Python 3.12.4.
+# Keep scikit-learn pinned: loading pickles with another version can change behaviour.
 scikit-learn==1.3.2
 pandas==2.2.3
 numpy==1.26.4
 joblib==1.4.2
 xgboost==3.0.1      # only needed for all_models/*xgboost*
 lightgbm==4.6.0     # only needed for all_models/*lightgbm*
+scipy
+matplotlib
+seaborn
+jupyterlab
+ipykernel
