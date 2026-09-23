@@ -2,7 +2,7 @@
 # scikit-learn is pinned exactly: unpickling a model across a different version emits
 # InconsistentVersionWarning and may change behaviour silently.
 # Use Python 3.12 or newer; the saved models were generated with Python 3.12.4.
-scikit-learn==1.3.2
+scikit-learn==1.5.0
 pandas==2.2.3
 numpy==1.26.4
 joblib==1.4.2
