@@ -6,6 +6,8 @@
 [![Dataset: 2,000 pairs](https://img.shields.io/badge/Dataset-2%2C000%20pairs-2ea44f)](input/drug_discovery_virtual_screening.csv)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
+![](https://github.com/RafaelGallo/Drug-Discovery-Virtual/blob/main/img/log.png?raw=true)
+
 An end-to-end data science project for virtual screening of compound–protein pairs. The workflow covers exploratory data analysis (EDA), classification of compound activity, binding-affinity regression, model interpretation, and batch prediction.
 
 The repository includes a simulated reference dataset with 2,000 compound–protein pairs. Results demonstrate the analysis and modeling workflow; they are not experimental evidence, clinical validation, or a substitute for laboratory testing.
