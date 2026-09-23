@@ -1,82 +1,153 @@
 # Drug Discovery Virtual Screening
 
-Projeto de ciência de dados para análise exploratória, treinamento e uso de modelos de *machine learning* na priorização virtual de pares composto-proteína. O fluxo inclui classificação de atividade, estimativa de afinidade de ligação e predição em lote.
+An end-to-end data science project for virtual screening of compound–protein pairs. The workflow covers exploratory data analysis (EDA), classification of compound activity, binding-affinity regression, model interpretation, and batch prediction.
 
-O repositório contém um conjunto de dados de referência simulado com 2.000 pares composto-proteína. Os resultados servem para demonstrar o fluxo de análise e modelagem; não substituem ensaios experimentais nem devem ser interpretados como validação clínica.
+The repository includes a simulated reference dataset with 2,000 compound–protein pairs. Results demonstrate the analysis and modeling workflow; they are not experimental evidence, clinical validation, or a substitute for laboratory testing.
 
-![Distribuição de afinidade de ligação e atividade](img/02_target_distribution.png)
+![Activity labels and binding-affinity distribution](img/02_target_distribution.png)
 
-| Resumo do conjunto de referência | Valor |
+| Dataset summary | Value |
 |---|---:|
-| Registros | 2.000 |
-| Colunas | 17 |
-| Registros ativos | 608 (30,4%) |
-| Treino / teste | 1.600 / 400 |
+| Compound–protein pairs | 2,000 |
+| Columns | 17 |
+| Active pairs | 608 (30.4%) |
+| Training / held-out test rows | 1,600 / 400 |
 
-## Resultados principais
+## Project workflow
 
-Os valores abaixo foram medidos em um conjunto de teste separado com 400 registros. O classificador final é uma regressão logística ajustada; o regressor final é uma regressão linear.
+1. Audit the dataset and identify useful chemical and protein descriptors.
+2. Benchmark classification models for the binary `active` label.
+3. Benchmark regression models for continuous `binding_affinity` (pKi).
+4. Select a decision threshold using out-of-fold training predictions.
+5. Save the final pipelines and score new compound batches.
 
-| Tarefa | Modelo | Métrica | Resultado |
+## Exploratory data analysis
+
+The EDA found that `active` is exactly defined as `binding_affinity >= 7.0`. The strongest feature associations with affinity are `logp_pi_interaction` (Pearson correlation 0.751) and `logp` (0.602). Missing values affect `logp`, `polar_surface_area`, and `hydrophobicity` at 3% each. About 5.7% of rows contain at least one descriptor beyond three standard deviations.
+
+These figures summarize data quality, the target relationship, feature associations, and the dataset's multivariate structure.
+
+<p align="center">
+  <img src="img/01_missing_values.png" alt="Missing-value audit across dataset features" width="49%">
+  <img src="img/02_target_distribution.png" alt="Class balance and binding-affinity distribution" width="49%">
+</p>
+<p align="center"><sub>Missing-value audit and target distribution.</sub></p>
+
+<p align="center">
+  <img src="img/03_target_leakage.png" alt="Deterministic relationship between affinity and activity" width="49%">
+  <img src="img/07_outliers.png" alt="Outlier analysis for molecular and protein descriptors" width="49%">
+</p>
+<p align="center"><sub>Target leakage check and descriptor outlier analysis.</sub></p>
+
+<p align="center">
+  <img src="img/09_target_associations.png" alt="Feature associations with binding affinity and activity" width="49%">
+  <img src="img/10_top_feature_scatter.png" alt="Scatter plots for the strongest affinity-associated features" width="49%">
+</p>
+<p align="center"><sub>Feature–target associations and the strongest feature relationships.</sub></p>
+
+<p align="center">
+  <img src="img/14_pca.png" alt="Principal component analysis of the feature space" width="49%">
+  <img src="img/16_feature_ranking.png" alt="Statistical ranking of features associated with the targets" width="49%">
+</p>
+<p align="center"><sub>Multivariate structure and feature ranking.</sub></p>
+
+## Machine learning models
+
+The modeling notebook compares ten classifiers and ten regressors. Preprocessing is kept inside the pipelines, and the classification threshold is chosen from out-of-fold predictions on the training data. The held-out test set contains 400 rows.
+
+### Final saved model performance
+
+The values below describe the final saved artifacts in `models/`, as recorded in `models/model_metadata.json`.
+
+| Task | Saved model | Metric | Held-out result |
 |---|---|---|---:|
-| Classificação de atividade | Regressão logística | ROC-AUC | 0,9578 |
-| Classificação de atividade | Regressão logística | Average precision | 0,9265 |
-| Classificação de atividade | Regressão logística | F1, limiar 0,465 | 0,8122 |
-| Estimativa de afinidade (pKi) | Regressão linear | RMSE | 0,7392 |
-| Estimativa de afinidade (pKi) | Regressão linear | MAE | 0,3370 |
-| Estimativa de afinidade (pKi) | Regressão linear | R² | 0,6155 |
+| Activity classification | Tuned Logistic Regression | ROC-AUC | 0.9578 |
+| Activity classification | Tuned Logistic Regression | Average precision | 0.9265 |
+| Activity classification | Tuned Logistic Regression | F1 at threshold 0.465 | 0.8122 |
+| Binding-affinity regression | Linear Regression | RMSE (pKi) | 0.7392 |
+| Binding-affinity regression | Linear Regression | MAE (pKi) | 0.3370 |
+| Binding-affinity regression | Linear Regression | R² | 0.6155 |
 
-O classificador escolhe o limiar de decisão usando previsões *out-of-fold* nos dados de treinamento. O conjunto de teste não é usado para essa escolha. Consulte `models/model_metadata.json` para métricas, limiar e versões das bibliotecas associadas aos artefatos salvos.
-
-## Visão geral dos dados e modelos
-
-O rótulo binário `active` é definido exatamente por `binding_affinity >= 7.0`. Por isso, `binding_affinity` não pode ser usado como variável de entrada do classificador. Da mesma forma, `active` é excluído das entradas do regressor. O identificador único `compound_id` também é removido das variáveis preditoras.
-
-As figuras abaixo ilustram achados da análise exploratória, do benchmark e da etapa de predição.
+The plots below show the broader benchmark, threshold selection, classifier diagnostics, regression results, and model interpretation.
 
 <p align="center">
-  <img src="img/03_target_leakage.png" alt="Relação determinística entre afinidade e atividade" width="49%">
-  <img src="img/09_target_associations.png" alt="Associações entre descritores e afinidade" width="49%">
+  <img src="img/ml_01_classifier_ranking.png" alt="Classifier benchmark ranking" width="49%">
+  <img src="img/ml_02_metric_comparison.png" alt="Comparison of classifier evaluation metrics" width="49%">
 </p>
+<p align="center"><sub>Classifier ranking and metric comparison.</sub></p>
 
 <p align="center">
-  <img src="img/ml_03_roc_pr_curves.png" alt="Curvas ROC e precisão-revocação dos classificadores" width="49%">
-  <img src="img/ml_10_regression_diagnostics.png" alt="Diagnósticos das previsões de afinidade" width="49%">
+  <img src="img/ml_03_roc_pr_curves.png" alt="ROC and precision-recall curves for classifiers" width="49%">
+  <img src="img/ml_05_threshold_scan.png" alt="F1, precision, and recall across candidate decision thresholds" width="49%">
 </p>
+<p align="center"><sub>Classification curves and decision-threshold selection.</sub></p>
 
 <p align="center">
-  <img src="img/pred_02_shortlist.png" alt="Lista priorizada de compostos com maior pontuação" width="75%">
+  <img src="img/ml_06_confusion_calibration.png" alt="Classifier confusion matrix and probability calibration" width="49%">
+  <img src="img/ml_07_permutation_importance.png" alt="Classifier permutation feature importance" width="49%">
 </p>
+<p align="center"><sub>Classifier errors, calibration, and permutation importance.</sub></p>
+
+<p align="center">
+  <img src="img/ml_09_regressor_ranking.png" alt="Regression model benchmark ranking" width="49%">
+  <img src="img/ml_10_regression_diagnostics.png" alt="Regression prediction and residual diagnostics" width="49%">
+</p>
+<p align="center"><sub>Regressor comparison and binding-affinity diagnostics.</sub></p>
+
+<p align="center">
+  <img src="img/ml_08_error_analysis.png" alt="Classification error analysis around the selected threshold" width="49%">
+  <img src="img/ml_11_regression_importance.png" alt="Regression feature importance" width="49%">
+</p>
+<p align="center"><sub>Classification error analysis and regression feature importance.</sub></p>
+
+## Batch prediction
+
+The batch workflow loads the saved model artifacts, generates an activity probability, a binary activity call, and a predicted binding affinity for each input row. It exports a full prediction table and a minimal binary file.
+
+<p align="center">
+  <img src="img/pred_01_score_distribution.png" alt="Distribution of batch prediction activity scores" width="49%">
+  <img src="img/pred_02_shortlist.png" alt="Top compounds ranked by predicted activity probability" width="49%">
+</p>
+<p align="center"><sub>Batch score distribution and top-compound shortlist.</sub></p>
+
+## Leakage controls and modeling notes
+
+- `active` is exactly `binding_affinity >= 7.0`. `binding_affinity` must not be a classifier feature.
+- `active` must not be a regressor feature.
+- `compound_id` is a unique identifier and is dropped from the feature matrix.
+- Missing numeric values are imputed inside the model pipeline; rows are not dropped for missing descriptors.
+- `protein_id` is label-encoded. Unseen protein identifiers receive the reserved value `-1` during inference.
+- Classification quality is reported with ROC-AUC, average precision, and F1, since the active class represents 30.4% of the dataset.
 
 ## Notebooks
 
-Execute os notebooks a partir da raiz do repositório para que os caminhos relativos funcionem.
+Run notebooks from the repository root so their relative data and output paths resolve correctly.
 
-1. [`01_exploratory_data_analysis.ipynb`](notebook/01_exploratory_data_analysis.ipynb) — qualidade dos dados, análise univariada e multivariada, relação entre os alvos, valores ausentes, outliers e recomendações para modelagem.
-2. [`02_machine_learning_models.ipynb`](notebook/02_machine_learning_models.ipynb) — engenharia de atributos, tratamento de categorias, benchmark de dez classificadores e dez regressores, ajuste do limiar, avaliação e gravação dos modelos.
-3. [`03_batch_prediction.ipynb`](notebook/03_batch_prediction.ipynb) — carregamento dos artefatos, predição em lote, exportação dos resultados e verificações de consistência.
+1. [`01_exploratory_data_analysis.ipynb`](notebook/01_exploratory_data_analysis.ipynb) — data quality, target analysis, descriptor distributions, associations, outliers, drug-likeness, and modeling recommendations.
+2. [`02_machine_learning_models.ipynb`](notebook/02_machine_learning_models.ipynb) — feature engineering, classifier and regressor benchmarks, threshold selection, evaluation, interpretation, and artifact export.
+3. [`03_batch_prediction.ipynb`](notebook/03_batch_prediction.ipynb) — batch scoring, output generation, and prediction validation.
 
-## Estrutura do repositório
+## Repository structure
 
 ```text
 Drug-Discovery-Virtual/
-├── img/                 # Figuras usadas neste README
-├── input/               # CSV de entrada do projeto
-├── models/              # Modelos finais, metadados e script de predição
-│   └── all_models/      # Classificadores e regressores avaliados
-├── notebook/            # EDA, benchmark e predição em lote
-├── output/              # Tabelas, figuras e arquivos de predição gerados
-│   └── figures/         # Figuras completas das análises
-├── src/                 # Código-fonte auxiliar de predição
+├── img/                 # Figures embedded in this README
+├── input/               # Reference input dataset
+├── models/              # Final models, metadata, and inference script
+│   └── all_models/      # Ten classifiers and ten regressors
+├── notebook/            # EDA, model benchmark, and batch prediction
+├── output/              # Analysis tables, figures, and prediction files
+│   └── figures/         # Figures generated by the notebooks
+├── src/                 # Supporting prediction source code
 ├── requirements.txt
 └── README.md
 ```
 
-## Instalação
+## Installation
 
-Use Python 3.12 ou superior. Os artefatos serializados foram gerados com Python 3.12.4 e scikit-learn 1.3.2; mantenha a versão do scikit-learn indicada nos arquivos de dependências ao carregar os modelos salvos.
+Use Python 3.12 or newer. The saved model artifacts were generated with Python 3.12.4 and scikit-learn 1.3.2. Keep the pinned scikit-learn version when loading the serialized models.
 
-No Windows PowerShell:
+### Windows PowerShell
 
 ```powershell
 python -m venv .venv
@@ -85,7 +156,7 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-No Linux ou macOS:
+### Linux or macOS
 
 ```bash
 python -m venv .venv
@@ -94,44 +165,44 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-Para abrir e executar os notebooks, inicie o JupyterLab na raiz do projeto:
+Start JupyterLab from the repository root to open the notebooks:
 
 ```bash
 jupyter lab
 ```
 
-As dependências para os modelos finais também estão listadas em [`models/requirements.txt`](models/requirements.txt). `xgboost` e `lightgbm` são necessários para reproduzir o benchmark completo; a inferência com os dois modelos finais não depende deles.
+`xgboost` and `lightgbm` are needed to reproduce the complete model benchmark. The two final saved pipelines can be used without those libraries. Model-specific dependencies are also listed in [`models/requirements.txt`](models/requirements.txt).
 
-## Fazer predições
+## Run predictions
 
-O script de linha de comando carrega os modelos salvos em `models/` e grava a tabela de resultados:
+Score a CSV and write the results to a chosen output path:
 
 ```bash
 python models/predict.py input/drug_discovery_virtual_screening.csv output/predictions_scored.csv
 ```
 
-Se o caminho de saída for omitido, o script cria um arquivo com sufixo `_scored.csv` ao lado do arquivo de entrada:
+When the output path is omitted, the script writes a file ending in `_scored.csv` next to the input file:
 
 ```bash
-python models/predict.py caminho/para/compostos.csv
+python models/predict.py path/to/compounds.csv
 ```
 
-Também é possível chamar o modelo pelo Python:
+The same model can be called from Python:
 
 ```python
 import pandas as pd
 
 from models.predict import ScreeningModel
 
-compostos = pd.read_csv("caminho/para/compostos.csv")
-modelo = ScreeningModel()
-resultado = modelo.predict(compostos)
-resultado.to_csv("predictions_scored.csv", index=False)
+compounds = pd.read_csv("path/to/compounds.csv")
+model = ScreeningModel()
+predictions = model.predict(compounds)
+predictions.to_csv("predictions_scored.csv", index=False)
 ```
 
-### Colunas exigidas na entrada
+### Required input columns
 
-O arquivo enviado para predição deve conter estas colunas:
+Each prediction row must provide these raw descriptors:
 
 ```text
 protein_id
@@ -150,19 +221,19 @@ mw_ratio
 logp_pi_interaction
 ```
 
-`compound_id` é opcional e, quando fornecido, é copiado para a saída para identificar cada registro. Valores ausentes são tratados pelo pipeline; proteínas não vistas no treinamento recebem uma codificação reservada. Colunas extras, inclusive `active` e `binding_affinity`, não são usadas para gerar as previsões.
+`compound_id` is optional and is copied into the results when present. Missing descriptor values are handled by the fitted pipeline. Extra columns, including `active` and `binding_affinity`, are not used to produce predictions.
 
-As colunas de resultado são `activity_probability`, `predicted_active` e `predicted_binding_affinity`, além de `compound_id` e `protein_id` quando informados na entrada. `predicted_active` usa o limiar de decisão salvo nos metadados do modelo.
+The result includes `activity_probability`, `predicted_active`, and `predicted_binding_affinity`, plus `compound_id` and `protein_id` when those identifiers are supplied. `predicted_active` uses the threshold stored with the classifier.
 
-## Arquivos gerados
+## Generated outputs
 
-- `output/eda_*.csv` e `output/eda_summary.json`: estatísticas e resultados da análise exploratória.
-- `output/ml_*.csv`: métricas do benchmark, importância de atributos e varredura de limiar.
-- `output/predictions.csv` e `output/predictions_binary.csv`: predições do notebook de processamento em lote.
-- `output/figures/`: figuras geradas pelos notebooks; as imagens usadas neste README estão em `img/`.
-- `models/best_classifier.joblib` e `models/best_regressor.joblib`: pipelines finais serializados.
-- `models/model_metadata.json`: contrato de entrada, ordem dos atributos, limiar, métricas e versões usadas na criação dos modelos.
+- `output/eda_*.csv` and `output/eda_summary.json` — EDA summaries and findings.
+- `output/ml_*.csv` — benchmark metrics, feature-importance results, and threshold scans.
+- `output/predictions.csv` and `output/predictions_binary.csv` — batch prediction results.
+- `output/figures/` — figures generated by the notebooks; README figures are in `img/`.
+- `models/best_classifier.joblib` and `models/best_regressor.joblib` — final serialized pipelines.
+- `models/model_metadata.json` — input contract, feature order, threshold, metrics, and library versions.
 
-## Licença
+## License
 
-Distribuído sob a licença MIT. Consulte [`LICENSE`](LICENSE).
+This project is distributed under the MIT License. See [`LICENSE`](LICENSE).
