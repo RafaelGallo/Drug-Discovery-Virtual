@@ -28,26 +28,38 @@ The EDA found that `active` is exactly defined as `binding_affinity >= 7.0`. The
 These figures summarize data quality, the target relationship, feature associations, and the dataset's multivariate structure.
 
 <p align="center">
-  <img src="img/01_missing_values.png" alt="Missing-value audit across dataset features" width="49%">
-  <img src="img/02_target_distribution.png" alt="Class balance and binding-affinity distribution" width="49%">
+  <img src="img/01_missing_values.png" alt="Missing-value audit across dataset features" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/02_target_distribution.png" alt="Class balance and binding-affinity distribution" width="100%">
 </p>
 <p align="center"><sub>Missing-value audit and target distribution.</sub></p>
 
 <p align="center">
-  <img src="img/03_target_leakage.png" alt="Deterministic relationship between affinity and activity" width="49%">
-  <img src="img/07_outliers.png" alt="Outlier analysis for molecular and protein descriptors" width="49%">
+  <img src="img/03_target_leakage.png" alt="Deterministic relationship between affinity and activity" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/07_outliers.png" alt="Outlier analysis for molecular and protein descriptors" width="100%">
 </p>
 <p align="center"><sub>Target leakage check and descriptor outlier analysis.</sub></p>
 
 <p align="center">
-  <img src="img/09_target_associations.png" alt="Feature associations with binding affinity and activity" width="49%">
-  <img src="img/10_top_feature_scatter.png" alt="Scatter plots for the strongest affinity-associated features" width="49%">
+  <img src="img/09_target_associations.png" alt="Feature associations with binding affinity and activity" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/10_top_feature_scatter.png" alt="Scatter plots for the strongest affinity-associated features" width="100%">
 </p>
 <p align="center"><sub>Feature–target associations and the strongest feature relationships.</sub></p>
 
 <p align="center">
-  <img src="img/14_pca.png" alt="Principal component analysis of the feature space" width="49%">
-  <img src="img/16_feature_ranking.png" alt="Statistical ranking of features associated with the targets" width="49%">
+  <img src="img/14_pca.png" alt="Principal component analysis of the feature space" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/16_feature_ranking.png" alt="Statistical ranking of features associated with the targets" width="100%">
 </p>
 <p align="center"><sub>Multivariate structure and feature ranking.</sub></p>
 
@@ -71,32 +83,47 @@ The values below describe the final saved artifacts in `models/`, as recorded in
 The plots below show the broader benchmark, threshold selection, classifier diagnostics, regression results, and model interpretation.
 
 <p align="center">
-  <img src="img/ml_01_classifier_ranking.png" alt="Classifier benchmark ranking" width="49%">
-  <img src="img/ml_02_metric_comparison.png" alt="Comparison of classifier evaluation metrics" width="49%">
+  <img src="img/ml_01_classifier_ranking.png" alt="Classifier benchmark ranking" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/ml_02_metric_comparison.png" alt="Comparison of classifier evaluation metrics" width="100%">
 </p>
 <p align="center"><sub>Classifier ranking and metric comparison.</sub></p>
 
 <p align="center">
-  <img src="img/ml_03_roc_pr_curves.png" alt="ROC and precision-recall curves for classifiers" width="49%">
-  <img src="img/ml_05_threshold_scan.png" alt="F1, precision, and recall across candidate decision thresholds" width="49%">
+  <img src="img/ml_03_roc_pr_curves.png" alt="ROC and precision-recall curves for classifiers" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/ml_05_threshold_scan.png" alt="F1, precision, and recall across candidate decision thresholds" width="100%">
 </p>
 <p align="center"><sub>Classification curves and decision-threshold selection.</sub></p>
 
 <p align="center">
-  <img src="img/ml_06_confusion_calibration.png" alt="Classifier confusion matrix and probability calibration" width="49%">
-  <img src="img/ml_07_permutation_importance.png" alt="Classifier permutation feature importance" width="49%">
+  <img src="img/ml_06_confusion_calibration.png" alt="Classifier confusion matrix and probability calibration" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/ml_07_permutation_importance.png" alt="Classifier permutation feature importance" width="100%">
 </p>
 <p align="center"><sub>Classifier errors, calibration, and permutation importance.</sub></p>
 
 <p align="center">
-  <img src="img/ml_09_regressor_ranking.png" alt="Regression model benchmark ranking" width="49%">
-  <img src="img/ml_10_regression_diagnostics.png" alt="Regression prediction and residual diagnostics" width="49%">
+  <img src="img/ml_09_regressor_ranking.png" alt="Regression model benchmark ranking" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/ml_10_regression_diagnostics.png" alt="Regression prediction and residual diagnostics" width="100%">
 </p>
 <p align="center"><sub>Regressor comparison and binding-affinity diagnostics.</sub></p>
 
 <p align="center">
-  <img src="img/ml_08_error_analysis.png" alt="Classification error analysis around the selected threshold" width="49%">
-  <img src="img/ml_11_regression_importance.png" alt="Regression feature importance" width="49%">
+  <img src="img/ml_08_error_analysis.png" alt="Classification error analysis around the selected threshold" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/ml_11_regression_importance.png" alt="Regression feature importance" width="100%">
 </p>
 <p align="center"><sub>Classification error analysis and regression feature importance.</sub></p>
 
@@ -105,8 +132,11 @@ The plots below show the broader benchmark, threshold selection, classifier diag
 The batch workflow loads the saved model artifacts, generates an activity probability, a binary activity call, and a predicted binding affinity for each input row. It exports a full prediction table and a minimal binary file.
 
 <p align="center">
-  <img src="img/pred_01_score_distribution.png" alt="Distribution of batch prediction activity scores" width="49%">
-  <img src="img/pred_02_shortlist.png" alt="Top compounds ranked by predicted activity probability" width="49%">
+  <img src="img/pred_01_score_distribution.png" alt="Distribution of batch prediction activity scores" width="100%">
+</p>
+
+<p align="center">
+  <img src="img/pred_02_shortlist.png" alt="Top compounds ranked by predicted activity probability" width="100%">
 </p>
 <p align="center"><sub>Batch score distribution and top-compound shortlist.</sub></p>
 
